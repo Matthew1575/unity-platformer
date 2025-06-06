@@ -1,19 +1,22 @@
 using UnityEngine;
 
-    // waasup
-
-
 public class PlayerMovement : MonoBehaviour
 {
+
+    public Rigidbody rb;
+
+    public float forwardForce;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        
     }
-
-    // Update is called once per frame
-    void Update()
+    // We marked this as "Fixed"Update because we
+    // are using it to mess with physics
+    void FixedUpdate()
     {
-
+        rb.AddForce(0, 0, 2000 * Time.deltaTime); // evens out if a computer has High or low Frame
+        
     }
 }
