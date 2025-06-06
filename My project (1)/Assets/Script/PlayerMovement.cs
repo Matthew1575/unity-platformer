@@ -1,22 +1,32 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+    PlayerInput playerinput;
 
-    public Rigidbody rb;
+    InputAction moveAction;
 
-    public float forwardForce;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Start()
     {
-        
+        playerinput = GetComponent<PlayerInput>();
+        moveAction = playerinput.actions.FindAction("Move");
     }
-    // We marked this as "Fixed"Update because we
-    // are using it to mess with physics
-    void FixedUpdate()
+
+    // updates once per frame
+    void Update()
     {
-        rb.AddForce(0, 0, 2000 * Time.deltaTime); // evens out if a computer has High or low Frame
-        
+        MovePlayer();
+    }
+
+    public void MovePlayer()
+    {   
+        // checking debugger in unity engine check console
+        Debug.Log(moveAction.ReadValue<Vector2>());
+
+        // creates a x, y vector
+        Vector2 direction = moveAction.ReadValue<Vector2>();
+        transform.position += new Vector3(direction.x, 0 , direction.y) * Time.deltaTime;  //  Time.deltatime makes the game smoother with high or low frames
     }
 }
