@@ -66,5 +66,5 @@
     "explorer.fileNesting.patterns": {
         "*.sln": "*.csproj"
     },
-    "dotnet.defaultSolution": "3dgame - Copy.sln"
+    "dotnet.defaultSolution": "Platformer3D.sln"
 }
