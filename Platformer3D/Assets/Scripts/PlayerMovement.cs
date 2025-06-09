@@ -144,7 +144,7 @@ public class PlayerMovement : MonoBehaviour
         x = Input.GetAxisRaw("Horizontal");
         y = Input.GetAxisRaw("Vertical");
         jumping = Input.GetButton("Jump");
-        crouching = Input.GetKey(KeyCode.LeftControl);
+        crouching = Input.GetKey(KeyCode.LeftControl); // Need this variable because neew
 
         //Crouching
         if (Input.GetKeyDown(KeyCode.LeftControl))
@@ -324,6 +324,7 @@ public class PlayerMovement : MonoBehaviour
 
         return new Vector2(xMag, yMag);
     }
+
     //a lot of math (dont touch)
     private void FindWallRunRotation()
     {
@@ -365,8 +366,8 @@ public class PlayerMovement : MonoBehaviour
             if (!cancelling)
             {
                 cancelling = true;
-                CancelInvoke("CancelWallrun");
-                Invoke("CancelWallrun", 0.2f);
+                CancelInvoke("CancelWallrun"); // Can cancel wallrun before wallruncanel is invoked
+                Invoke("CancelWallrun", 0.1f); // String nameOfMethod, Int timeToCancel
             }
         }
         else
@@ -480,7 +481,7 @@ public class PlayerMovement : MonoBehaviour
         //for when we want to stop wallrunning
         MonoBehaviour.print("cancelled wallrun");
         Invoke("GetReadyToWallrun", 0.1f);
-        rb.AddForce(wallNormalVector * escapeForce);
+        rb.AddForce(wallNormalVector * escapeForce, ForceMode.Impulse);
         isWallRunning = false;
     }
 
